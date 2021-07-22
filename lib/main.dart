@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:money_flow/screens/home_screen.dart';
 import 'package:money_flow/theme.dart';
-import 'package:money_flow/widgets/exiting_listview.dart';
-import 'package:money_flow/widgets/incoming_listview.dart';
 
 void main() {
   runApp(MyApp());
