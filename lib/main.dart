@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_flow/theme.dart';
+import 'package:money_flow/widgets/exiting_listview.dart';
+import 'package:money_flow/widgets/incoming_listview.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,6 +30,7 @@ class MainScreen extends StatelessWidget {
         title: Text("A/V Takibi"),
       ),
       body: Container(
+        child: ExitingForm(),
         color: AppColors.blackColor,
       ),
     );
