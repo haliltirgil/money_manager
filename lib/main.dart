@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:money_flow/screens/home_screen.dart';
 import 'package:money_flow/theme.dart';
 import 'package:money_flow/widgets/exiting_listview.dart';
 import 'package:money_flow/widgets/incoming_listview.dart';
@@ -16,23 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: AppColors.greyColor,
       ),
-      home: MainScreen(),
-    );
-  }
-}
-
-class MainScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text("A/V Takibi"),
-      ),
-      body: Container(
-        child: ExitingForm(),
-        color: AppColors.blackColor,
-      ),
+      home: HomeScreen(),
     );
   }
 }
