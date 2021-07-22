@@ -35,8 +35,31 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            buildButtons(),
-            isSelected[0] == false ? ExitingForm() : IncomingForm(),
+            Container(
+              color: Colors.red,
+              height: 200,
+            ),
+            Container(
+              color: Colors.red,
+              height: 200,
+            ),
+            Container(
+              color: Colors.red,
+              height: 200,
+            ),
+            Container(
+              color: Colors.white,
+              height: 200,
+            ),
+
+            //buildButtons(),
+            //isSelected[0] == false ? ExitingForm() : IncomingForm(),
+            IncomingForm(),
+            ExitingForm(),
+            Container(
+              color: Colors.green,
+              height: 200,
+            ),
           ],
         ),
       ),
