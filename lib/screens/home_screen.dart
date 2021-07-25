@@ -20,7 +20,11 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         leading: Padding(
           padding: const EdgeInsets.only(left: 12.0),
-          child: IconButton(icon: Icon(Icons.add), onPressed: () {}),
+          child: IconButton(
+              icon: Icon(Icons.add),
+              onPressed: () {
+                addElement();
+              }),
         ),
         centerTitle: true,
         title: Text(
@@ -36,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 30.0,
                 ),
                 onPressed: () {
-                  _snackBar();
+                  snackBar();
                 }),
           ),
         ],
@@ -114,5 +118,74 @@ class _HomeScreenState extends State<HomeScreen> {
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
+  }
+
+  addElement() {
+    showDialog(
+      builder: (context) => SimpleDialog(
+        backgroundColor: AppColors.whiteColor,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        title: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width / 60),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  fillColor: AppColors.whiteColor,
+                  labelText: 'Kişi: ',
+                ),
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height / 45),
+            Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width / 60),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  fillColor: AppColors.whiteColor,
+                  labelText: 'Tür: ',
+                ),
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height / 45),
+            Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width / 60),
+              child: TextFormField(
+                decoration: InputDecoration(
+                  fillColor: AppColors.whiteColor,
+                  labelText: 'Miktar: ',
+                ),
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height / 30),
+            SizedBox(
+              width: MediaQuery.of(context).size.width / 2.7,
+              height: MediaQuery.of(context).size.height / 20,
+              child: TextButton(
+                onPressed: () {},
+                child: Text(
+                  "Ekle",
+                  style: AppColors.fontStyle,
+                ),
+                style: ButtonStyle(
+                    shape: MaterialStateProperty.all<OutlinedBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30.0),
+                        ),
+                      ),
+                    ),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.green[700])),
+              ),
+            ),
+            SizedBox(height: MediaQuery.of(context).size.height / 45),
+          ],
+        ),
+      ),
+      context: context,
+    );
   }
 }
