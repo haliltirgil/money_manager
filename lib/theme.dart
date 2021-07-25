@@ -14,3 +14,7 @@ class AppColors {
   static const TextStyle fontStyle =
       TextStyle(color: AppColors.whiteColor, fontFamily: 'Rubik');
 }
+
+class LogoConstants {
+  static const String appBarLogo = 'assets/logo.svg';
+}

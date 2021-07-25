@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:money_flow/widgets/exiting_listview.dart';
 import 'package:money_flow/widgets/incoming_listview.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../theme.dart';
 
@@ -18,8 +19,9 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: AppColors.blackColor,
       appBar: AppBar(
         leading: Padding(
-            padding: const EdgeInsets.only(left: 12.0),
-            child: IconButton(icon: Icon(Icons.add), onPressed: () {})),
+          padding: const EdgeInsets.only(left: 12.0),
+          child: IconButton(icon: Icon(Icons.add), onPressed: () {}),
+        ),
         centerTitle: true,
         title: Text(
           "A/V Takibi",
@@ -28,7 +30,14 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
-            child: IconButton(icon: Icon(Icons.attach_money), onPressed: () {}),
+            child: IconButton(
+                icon: SvgPicture.asset(
+                  LogoConstants.appBarLogo,
+                  width: 30.0,
+                ),
+                onPressed: () {
+                  _snackBar();
+                }),
           ),
         ],
       ),
@@ -89,5 +98,21 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
+  }
+
+  snackBar() {
+    if (1 == 0) {
+      final snackBar = SnackBar(
+        content: Text("100 Lira Kardasın."),
+        duration: Duration(seconds: 3),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    } else {
+      final snackBar = SnackBar(
+        content: Text("50 Lira Zarardasın."),
+        duration: Duration(seconds: 3),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
   }
 }
