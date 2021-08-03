@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:money_flow/providers/exiting_provider.dart';
 import 'package:money_flow/theme.dart';
+import 'package:provider/provider.dart';
 
 class ExitingForm extends StatefulWidget {
   @override
@@ -9,7 +11,8 @@ class ExitingForm extends StatefulWidget {
 class _ExitingFormState extends State<ExitingForm> {
   @override
   Widget build(BuildContext context) {
-    return 10 == 0
+    final exitingProvider = Provider.of<ExitingProvider>(context);
+    return exitingProvider.exitingList.length == 0
         ? Padding(
             padding: const EdgeInsets.only(top: 250.0), // responsive
             child: Container(
@@ -29,8 +32,10 @@ class _ExitingFormState extends State<ExitingForm> {
                   ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: 18,
+                      itemCount: exitingProvider.exitingList.length,
                       itemBuilder: (context, index) {
+                        UniqueKey key =
+                            exitingProvider.exitingList.keys.elementAt(index);
                         return Card(
                           color: AppColors.redColor,
                           shape: RoundedRectangleBorder(
@@ -40,15 +45,15 @@ class _ExitingFormState extends State<ExitingForm> {
                             padding: const EdgeInsets.all(8.0),
                             child: ListTile(
                               title: Text(
-                                "Kira",
+                                "${exitingProvider.exitingList[key].type}",
                                 style: AppColors.fontStyle,
                               ),
                               subtitle: Text(
-                                "1500 TL",
+                                "${exitingProvider.exitingList[key].value}",
                                 style: AppColors.fontStyle,
                               ),
                               trailing: Text(
-                                " Ahmet Yılmaz",
+                                "${exitingProvider.exitingList[key].person}",
                                 style: AppColors.fontStyle,
                               ),
                               onTap: () {},

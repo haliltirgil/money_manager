@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:money_flow/providers/incoming_provider.dart';
 import 'package:money_flow/theme.dart';
+import 'package:provider/provider.dart';
 
 class IncomingForm extends StatefulWidget {
   @override
@@ -9,7 +11,8 @@ class IncomingForm extends StatefulWidget {
 class _IncomingFormState extends State<IncomingForm> {
   @override
   Widget build(BuildContext context) {
-    return 10 == 0
+    final incomingProvider = Provider.of<IncomingProvider>(context);
+    return incomingProvider.incomingList.length == 0
         ? Padding(
             padding: const EdgeInsets.only(top: 250.0), // responsive
             child: Container(
@@ -29,8 +32,10 @@ class _IncomingFormState extends State<IncomingForm> {
                   ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: 18,
+                      itemCount: incomingProvider.incomingList.length,
                       itemBuilder: (context, index) {
+                        UniqueKey key =
+                            incomingProvider.incomingList.keys.elementAt(index);
                         return Card(
                           color: AppColors.greenColor,
                           shape: RoundedRectangleBorder(
@@ -40,15 +45,15 @@ class _IncomingFormState extends State<IncomingForm> {
                             padding: const EdgeInsets.all(8.0),
                             child: ListTile(
                               title: Text(
-                                "Kira",
+                                "${incomingProvider.incomingList[key].type}",
                                 style: AppColors.fontStyle,
                               ),
                               subtitle: Text(
-                                "1500 TL",
+                                "${incomingProvider.incomingList[key].value}",
                                 style: AppColors.fontStyle,
                               ),
                               trailing: Text(
-                                " Ahmet Yılmaz",
+                                "${incomingProvider.incomingList[key].person}",
                                 style: AppColors.fontStyle,
                               ),
                               onTap: () {},

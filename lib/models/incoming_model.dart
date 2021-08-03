@@ -1,7 +1,10 @@
-class Incoming {
-  final String person;
-  final String value;
-  final String type;
+import 'package:flutter/widgets.dart';
 
-  Incoming(this.person, this.value, this.type);
+class Incoming {
+  UniqueKey id;
+  String person;
+  String type;
+  int value;
+
+  Incoming({id, person, type, value});
 }

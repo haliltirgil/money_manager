@@ -10,7 +10,7 @@ class IncomingProvider extends ChangeNotifier {
 
   UniqueKey getId(id) => _incomingList[id].id;
 
-  Map<UniqueKey, Incoming> get studentList => _incomingList;
+  Map<UniqueKey, Incoming> get incomingList => _incomingList;
 
   void changePerson(int id, String value) {
     _incomingList[id].person = value;
