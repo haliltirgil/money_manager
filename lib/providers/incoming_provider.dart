@@ -27,7 +27,7 @@ class IncomingProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addUser(String person, String type, String value) {
+  void addElement(String person, String type, String value) {
     UniqueKey key = UniqueKey();
     _incomingList.putIfAbsent(key, () => Incoming());
 

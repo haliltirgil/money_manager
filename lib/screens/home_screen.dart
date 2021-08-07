@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: IconButton(
               icon: Icon(Icons.add),
               onPressed: () {
-                addElement(context);
+                _addElement(context);
               }),
         ),
         centerTitle: true,
@@ -56,7 +56,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 30.0,
                 ),
                 onPressed: () {
-                  snackBar();
+                  _snackBar();
                 }),
           ),
         ],
@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            buildButtons(),
+            _buildButtons(),
             isSelected[0] == false ? ExitingForm() : IncomingForm(),
           ],
         ),
@@ -72,7 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget buildButtons() {
+  Widget _buildButtons() {
     return Padding(
       padding: EdgeInsets.only(
         top: MediaQuery.of(context).size.height / 20,
@@ -120,23 +120,25 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  snackBar() {
-    if (1 == 0) {
+  _snackBar() {
+    _calculateTotalMoney();
+
+    if (_calculateTotalMoney() < 0) {
       final snackBar = SnackBar(
-        content: Text("100 Lira Kardasın."),
+        content: Text(_calculateTotalMoney().toString() + " TL Zarardasın."),
         duration: Duration(seconds: 3),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     } else {
       final snackBar = SnackBar(
-        content: Text("50 Lira Zarardasın."),
+        content: Text(_calculateTotalMoney().toString() + " TL Kardasın."),
         duration: Duration(seconds: 3),
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 
-  addElement(BuildContext context) {
+  _addElement(BuildContext context) {
     final incomingProvider =
         Provider.of<IncomingProvider>(context, listen: false);
 
@@ -197,11 +199,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: TextButton(
                         onPressed: () {
                           if (isSelected[0] == false) {
-                            exitingProvider.addUser(personController.text,
+                            exitingProvider.addElement(personController.text,
                                 typeController.text, valueController.text);
                             FocusScope.of(context).unfocus();
                           } else {
-                            incomingProvider.addUser(personController.text,
+                            incomingProvider.addElement(personController.text,
                                 typeController.text, valueController.text);
                           }
                         },
@@ -231,5 +233,24 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       context: context,
     );
+  }
+
+  int _calculateTotalMoney() {
+    int totalIncomingMoney = 0;
+    int totalExitingMoney = 0;
+    final exitingProvider =
+        Provider.of<ExitingProvider>(context, listen: false);
+
+    final incomingProvider =
+        Provider.of<IncomingProvider>(context, listen: false);
+
+    for (int i = 0; i < exitingProvider.exitingList.length; i++) {
+      totalExitingMoney += 1;
+    }
+    for (int i = 0; i < incomingProvider.incomingList.length; i++) {
+      totalIncomingMoney += 1;
+    }
+
+    return totalIncomingMoney - totalExitingMoney;
   }
 }

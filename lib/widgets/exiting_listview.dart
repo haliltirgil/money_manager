@@ -11,7 +11,6 @@ class ExitingForm extends StatefulWidget {
 class _ExitingFormState extends State<ExitingForm> {
   @override
   Widget build(BuildContext context) {
-    Map<String, bool> exitingMap;
     final exitingProvider = Provider.of<ExitingProvider>(context);
     return exitingProvider.exitingList.length == 0
         ? Padding(
@@ -57,9 +56,7 @@ class _ExitingFormState extends State<ExitingForm> {
                               "${exitingProvider.exitingList[key].person}",
                               style: AppColors.fontStyle,
                             ),
-                            onLongPress: () {
-                              print("uzun bastılar");
-                            },
+                            onLongPress: () {},
                           ),
                         ),
                       );
