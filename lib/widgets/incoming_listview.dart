@@ -49,7 +49,7 @@ class _IncomingFormState extends State<IncomingForm> {
                                 style: AppColors.fontStyle,
                               ),
                               subtitle: Text(
-                                "${incomingProvider.incomingList[key].value}",
+                                "${incomingProvider.incomingList[key].value}  TL",
                                 style: AppColors.fontStyle,
                               ),
                               trailing: Text(

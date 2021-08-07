@@ -11,6 +11,7 @@ class ExitingForm extends StatefulWidget {
 class _ExitingFormState extends State<ExitingForm> {
   @override
   Widget build(BuildContext context) {
+    Map<String, bool> exitingMap;
     final exitingProvider = Provider.of<ExitingProvider>(context);
     return exitingProvider.exitingList.length == 0
         ? Padding(
@@ -30,38 +31,40 @@ class _ExitingFormState extends State<ExitingForm> {
               child: Column(
                 children: <Widget>[
                   ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: exitingProvider.exitingList.length,
-                      itemBuilder: (context, index) {
-                        UniqueKey key =
-                            exitingProvider.exitingList.keys.elementAt(index);
-                        return Card(
-                          color: AppColors.redColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ListTile(
-                              title: Text(
-                                "${exitingProvider.exitingList[key].type}",
-                                style: AppColors.fontStyle,
-                              ),
-                              subtitle: Text(
-                                "${exitingProvider.exitingList[key].value}",
-                                style: AppColors.fontStyle,
-                              ),
-                              trailing: Text(
-                                "${exitingProvider.exitingList[key].person}",
-                                style: AppColors.fontStyle,
-                              ),
-                              onTap: () {},
-                              onLongPress: () {/* içeriği silecek */},
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: exitingProvider.exitingList.length,
+                    itemBuilder: (context, index) {
+                      UniqueKey key =
+                          exitingProvider.exitingList.keys.elementAt(index);
+                      return Card(
+                        color: AppColors.redColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ListTile(
+                            title: Text(
+                              "${exitingProvider.exitingList[key].type}",
+                              style: AppColors.fontStyle,
                             ),
+                            subtitle: Text(
+                              "${exitingProvider.exitingList[key].value}  TL",
+                              style: AppColors.fontStyle,
+                            ),
+                            trailing: Text(
+                              "${exitingProvider.exitingList[key].person}",
+                              style: AppColors.fontStyle,
+                            ),
+                            onLongPress: () {
+                              print("uzun bastılar");
+                            },
                           ),
-                        );
-                      })
+                        ),
+                      );
+                    },
+                  )
                 ],
               ),
             ),

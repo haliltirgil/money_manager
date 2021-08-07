@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:money_flow/models/exiting_model.dart';
+import 'package:money_flow/providers/exiting_provider.dart';
+import 'package:money_flow/providers/incoming_provider.dart';
 import 'package:money_flow/widgets/exiting_listview.dart';
 import 'package:money_flow/widgets/incoming_listview.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../theme.dart';
 
@@ -14,6 +17,18 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final List<bool> isSelected = [true, false];
 
+  final TextEditingController personController = TextEditingController();
+  final TextEditingController typeController = TextEditingController();
+  final TextEditingController valueController = TextEditingController();
+
+  @override
+  void dispose() {
+    personController.dispose();
+    typeController.dispose();
+    valueController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: IconButton(
               icon: Icon(Icons.add),
               onPressed: () {
-                addElement();
+                addElement(context);
               }),
         ),
         centerTitle: true,
@@ -121,76 +136,97 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  addElement() {
+  addElement(BuildContext context) {
+    final incomingProvider =
+        Provider.of<IncomingProvider>(context, listen: false);
+
+    final exitingProvider =
+        Provider.of<ExitingProvider>(context, listen: false);
+
     showDialog(
       builder: (context) => SingleChildScrollView(
-        child: Column(
-          children: [
-            SimpleDialog(
-              backgroundColor: AppColors.whiteColor,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              title: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width / 60),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        fillColor: AppColors.whiteColor,
-                        labelText: 'Kişi: ',
+        child: Padding(
+          padding: EdgeInsets.only(top: MediaQuery.of(context).size.height / 5),
+          child: Column(
+            children: [
+              SimpleDialog(
+                backgroundColor: AppColors.whiteColor,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                title: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width / 60),
+                      child: TextFormField(
+                        controller: personController,
+                        decoration: InputDecoration(
+                          fillColor: AppColors.whiteColor,
+                          labelText: 'Kişi: ',
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 45),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width / 60),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        fillColor: AppColors.whiteColor,
-                        labelText: 'Tür: ',
+                    SizedBox(height: MediaQuery.of(context).size.height / 45),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width / 60),
+                      child: TextFormField(
+                        controller: typeController,
+                        decoration: InputDecoration(
+                          fillColor: AppColors.whiteColor,
+                          labelText: 'Tür: ',
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 45),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: MediaQuery.of(context).size.width / 60),
-                    child: TextFormField(
-                      decoration: InputDecoration(
-                        fillColor: AppColors.whiteColor,
-                        labelText: 'Miktar: ',
+                    SizedBox(height: MediaQuery.of(context).size.height / 45),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: MediaQuery.of(context).size.width / 60),
+                      child: TextFormField(
+                        controller: valueController,
+                        decoration: InputDecoration(
+                          fillColor: AppColors.whiteColor,
+                          labelText: 'Miktar: ',
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 30),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width / 2.7,
-                    height: MediaQuery.of(context).size.height / 20,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        "Ekle",
-                        style: AppColors.fontStyle,
-                      ),
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all<OutlinedBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(30.0),
+                    SizedBox(height: MediaQuery.of(context).size.height / 30),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width / 2.7,
+                      height: MediaQuery.of(context).size.height / 20,
+                      child: TextButton(
+                        onPressed: () {
+                          if (isSelected[0] == false) {
+                            exitingProvider.addUser(personController.text,
+                                typeController.text, valueController.text);
+                            FocusScope.of(context).unfocus();
+                          } else {
+                            incomingProvider.addUser(personController.text,
+                                typeController.text, valueController.text);
+                          }
+                        },
+                        child: Text(
+                          "Ekle",
+                          style: AppColors.fontStyle,
+                        ),
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<OutlinedBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(30.0),
+                                ),
                               ),
                             ),
-                          ),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.green[700])),
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Colors.green[700])),
+                      ),
                     ),
-                  ),
-                  SizedBox(height: MediaQuery.of(context).size.height / 45),
-                ],
+                    SizedBox(height: MediaQuery.of(context).size.height / 45),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       context: context,
