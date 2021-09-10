@@ -1,6 +1,6 @@
 # APP UI
+![resim](https://user-images.githubusercontent.com/56155975/132844564-c9ad3598-d29b-4357-9289-c1e971fc463a.png)
+![resim](https://user-images.githubusercontent.com/56155975/132844852-9f585fb6-a543-41bb-ba04-1f03f6fe61f8.png)
+![resim](https://user-images.githubusercontent.com/56155975/132844964-44964a35-0532-42d4-accf-8a1e02abd1df.png)
+![resim](https://user-images.githubusercontent.com/56155975/132844987-2dca1d4e-d467-416d-9f16-85b526fe3b5f.png)
 
-![Screenshot_1631271063](https://user-images.githubusercontent.com/56155975/132843036-95fe0899-7532-4874-b8e4-de06f013ee34.png)
-![Screenshot_1631271082](https://user-images.githubusercontent.com/56155975/132843041-f3a956c0-2947-4581-80aa-9ba6f4369248.png)
-![Screenshot_1631271146](https://user-images.githubusercontent.com/56155975/132843045-6d6bdef3-1180-4a93-9d8a-365c6558e555.png)
-![Screenshot_1631271149](https://user-images.githubusercontent.com/56155975/132843048-ac06cace-8233-4a22-9d72-055f4c7a94f6.png)
