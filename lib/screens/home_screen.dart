@@ -121,21 +121,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   _snackBar() {
-    _calculateTotalMoney();
-
-    if (_calculateTotalMoney() < 0) {
-      final snackBar = SnackBar(
-        content: Text(_calculateTotalMoney().toString() + " TL Zarardasın."),
-        duration: Duration(seconds: 3),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    } else {
-      final snackBar = SnackBar(
-        content: Text(_calculateTotalMoney().toString() + " TL Kardasın."),
-        duration: Duration(seconds: 3),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
+    final snackBar = SnackBar(
+      content: Text(" Özlü söze ne hacet. Parayı iyi kullanın "),
+      duration: Duration(seconds: 3),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
   _addElement(BuildContext context) {
